@@ -9,9 +9,16 @@ from PIL import Image
 # ========== PREDICTION FUNCTION ==========
 def model_prediction(test_image):
     try:
-        model_path = "training/trained_plant_disease_model.keras"
+         current_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(current_dir, "training", "trained_plant_disease_model.keras")
+        # =====================================
+
+        # Debugging checks (optional but recommended)
+        st.write("Current directory:", current_dir)
+        st.write("Model path:", model_path)
+        
         if not os.path.exists(model_path):
-            st.error(f"Model file not found at: {os.path.abspath(model_path)}")
+            st.error(f"Model file not found at: {model_path}")
             return None, None
 
         model = tf.keras.models.load_model(model_path)
